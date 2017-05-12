@@ -1,0 +1,11 @@
+get all reviews for one product
+tokenize them into sentences
+tokenize each sentence into words
+remove all the stop words
+POS tag each word
+using this, extract all the aspects of the review
+calculate frequency of each aspect
+if frequency crosses a set limit, consider it one of the main topics of discussion
+based on this, assign a rank to the sentence with the aspect
+now calculate the sentiment of these sentences, and for each aspect calculate the net sentiment
+display the top sentences grouped by aspects
