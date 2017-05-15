@@ -75,7 +75,6 @@ def main():
 	text = read_file_1()
 	review_tokens = [get_words(asdf) for asdf in text]
 	stopped_sent = [stopword_rem(sentence) for sentence in review_tokens]
-	text_score = [score_keyphrases_by_textrank(asdf) for asdf in text]
 
 	sents = []
 	for i in stopped_sent:
@@ -87,6 +86,7 @@ def main():
 
 	sid = SentimentIntensityAnalyzer()
 	sentiment_scores = [sid.polarity_scores(sent) for sent in sents]
+	print sentiment_scores
 	bla = [[asdf['pos'],-1*asdf['neg']] for asdf in sentiment_scores]
 	bla.sort()
 	qwer = range(len(bla))
@@ -111,3 +111,6 @@ def main():
     )
 	fig = go.Figure(data=data, layout=layout)
 	py.plot(fig, filename='Sentiment Analysis')
+
+if __name__ == '__main__':
+		main()		

@@ -51,7 +51,7 @@ def extract_candidate_words(text, good_tags=set(['JJ','JJR','JJS','NN','NNP','NN
     return candidates
 
 def score_keyphrases_by_textrank(text, n_keywords=0.05):
-    from itertools import takewhile, tee, zip
+    from itertools import takewhile, tee, izip
     import networkx, nltk
     # tokenize for all words, and extract *candidate* words
     words = [word.lower()
@@ -102,7 +102,7 @@ def get_frequency(wordlist, paralist):
 
 def read_file(file_number):
 	#Open customer review files and read Review Titles and Content from them
-	path = '/home/jeevan/Desktop/AmazonReviews/laptops/'
+	path = 'Dataset/AmazonReviews/laptops/'
 	filenames = []
 	for filename in os.listdir(path):
 		filenames.append(filename)
@@ -190,20 +190,27 @@ def main():
 	pos_sents = ""
 	neg_sents = ""
 
+	j=0
 	print "\n\n Positive: \n"
 	for i in range(0,len(aspect_sent_uniq)):
-		if sentiment_scores[i]['pos'] > sentiment_scores[i]['neg']:
+		if sentiment_scores[i]['pos'] > sentiment_scores[i]['neg'] and j<10:
 			print sents[aspect_sent_uniq[i]]
 			pos_sents = sents[aspect_sent_uniq[i]] + " "
+			j=j+1
 
 	print "\n\nPositive Sentences Polarity:"
 	print sid.polarity_scores(pos_sents)
 
+	j=0
 	print "\n\n Negative: \n"
 	for i in range(0,len(aspect_sent_uniq)):
-		if sentiment_scores[i]['neg'] > sentiment_scores[i]['pos']:
+		if sentiment_scores[i]['neg'] > sentiment_scores[i]['pos'] and j<10:
 			print sents[aspect_sent_uniq[i]]
 			neg_sents = sents[aspect_sent_uniq[i]] + " "
+			j=j+1
 
 	print "\n\nNegitive Sentences Polarity:"
 	print sid.polarity_scores(neg_sents)
+
+if __name__ == '__main__':
+		main()	
